@@ -7,11 +7,11 @@ function toArabicNumber(number) {
   return number.toString().split('').map(d => arabicDigits[parseInt(d)]).join('');
 }
 
-fetch(`https://equran.id/api/surat/${nomorSurat}`)
+fetch(`https://equran.id/api/Surat/${nomorSurat}`)
   .then(res => res.json())
   .then(data => {
     // Header Surat
-    document.getElementById('header-surat').innerHTML = `
+    document.getElementById('header-Surat').innerHTML = `
       <h3>${data.nama_latin} (${data.arti})</h3>
       <p><em>${data.deskripsi}</em></p>
       <div class="text-center my-4">
@@ -20,7 +20,7 @@ fetch(`https://equran.id/api/surat/${nomorSurat}`)
 
     const isiContainer = document.getElementById('isi-surat');
 
-    // Tambahkan Basmalah jika bukan surat ke-9
+    // Tambahkan Basmalah jika bukan Surat ke-9
     if (parseInt(nomorSurat) !== 9) {
       const basmalahCard = document.createElement('div');
       basmalahCard.className = 'card mb-3 text-center border border-2 border-dark';
