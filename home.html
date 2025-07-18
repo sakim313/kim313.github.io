@@ -32,44 +32,44 @@
 </head>
 <body class="bg-light">
   <div class="container py-5">
-    <h2 class="text-center mb-4">Daftar Surat Al-Qur'an</h2>
+    <h2 class="text-center mb-4">Daftar surat Al-Qur'an</h2>
     <input type="text" id="searchInput" class="form-control search-box" placeholder="Cari nama surat atau arti...">
     <div id="daftar-surat" class="row g-3 mt-4"></div>
   </div>
 
   <script>
-    // array untuk menyimpan semua Surat
+    // array untuk menyimpan semua surat
     let allSurat = [];
 
-    // ambil data Surat dari API
-    fetch('https://equran.id/api/Surat')
+    // ambil data surat dari API
+    fetch('https://equran.id/api/surat')
       .then(res => res.json())
       .then(data => {
         allSurat = data;
-        renderSurat(data);
+        rendersurat(data);
       })
       .catch(err => {
         console.error('Gagal mengambil data:', err);
-        document.getElementById('daftar-Surat').innerHTML =
-          '<p class="text-danger">Gagal memuat daftar Surat. Cek koneksi atau coba lagi nanti.</p>';
+        document.getElementById('daftar-surat').innerHTML =
+          '<p class="text-danger">Gagal memuat daftar surat. Cek koneksi atau coba lagi nanti.</p>';
       });
 
-    // fungsi menampilkan kartu Surat
-    function renderSurat(data) {
-      const container = document.getElementById('daftar-Surat');
+    // fungsi menampilkan kartu surat
+    function rendersurat(data) {
+      const container = document.getElementById('daftar-surat');
       container.innerHTML = '';
-      data.forEach(Surat => {
+      data.forEach(surat => {
         const col = document.createElement('div');
         col.className = 'col-12 col-sm-6 col-md-4 col-lg-3';
         col.innerHTML = `
           <div class="card Surat-card h-100 p-3">
-            <h5 class="card-title mb-1">${Surat.nomor}. ${Surat.nama_latin}</h5>
-            <p class="text-muted mb-2">${Surat.arti} • ${Surat.jumlah_ayat} ayat</p>
-            <div class="text-end fw-bold fs-4">${Surat.nama}</div>
+            <h5 class="card-title mb-1">${surat.nomor}. ${surat.nama_latin}</h5>
+            <p class="text-muted mb-2">${surat.arti} • ${surat.jumlah_ayat} ayat</p>
+            <div class="text-end fw-bold fs-4">${surat.nama}</div>
           </div>
         `;
         col.querySelector('.card').onclick = () => {
-          window.location.href = 'surat.html?nomor=' + Surat.nomor;
+          window.location.href = 'surat.html?nomor=' + surat.nomor;
         };
         container.appendChild(col);
       });
@@ -79,11 +79,11 @@
     document.getElementById('searchInput').addEventListener('input', function () {
       const keyword = this.value.toLowerCase();
       const filtered = allSurat.filter(surat =>
-        Surat.nama_latin.toLowerCase().includes(keyword) ||
-        Surat.arti.toLowerCase().includes(keyword) ||
-        Surat.nomor.toString() === keyword
+        surat.nama_latin.toLowerCase().includes(keyword) ||
+        surat.arti.toLowerCase().includes(keyword) ||
+        surat.nomor.toString() === keyword
       );
-      renderSurat(filtered);
+      rendersurat(filtered);
     });
   </script>
 </body>

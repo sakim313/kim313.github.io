@@ -1,14 +1,14 @@
-let allSurat = [];
+let allsurat = [];
 
 fetch('https://equran.id/api/Surat')
   .then(res => res.json())
   .then(data => {
-    allSurat = data;
-    renderSurat(data);
+    allsurat = data;
+    rendersurat(data);
   });
 
 function renderSurat(data) {
-  const listContainer = document.getElementById('daftar-Surat');
+  const listContainer = document.getElementById('daftar-surat');
   listContainer.innerHTML = ''; // Bersihkan dulu
 
   data.forEach(surat => {
@@ -24,8 +24,8 @@ function renderSurat(data) {
     const cardBody = `
       <div class="card-body d-flex flex-column justify-content-between">
         <div>
-          <h5 class="card-title fw-bold">${Surat.nomor}. ${Surat.nama_latin}</h5>
-          <p class="card-subtitle text-muted">${Surat.arti} - ${Surat.jumlah_ayat} Ayat</p>
+          <h5 class="card-title fw-bold">${surat.nomor}. ${surat.nama_latin}</h5>
+          <p class="card-subtitle text-muted">${surat.arti} - ${surat.jumlah_ayat} Ayat</p>
         </div>
         <div class="mt-3 d-flex justify-content-between">
         </div>
@@ -33,7 +33,7 @@ function renderSurat(data) {
     `;
 
     card.innerHTML = cardBody;
-    card.onclick = () => window.location.href = `Surat.html?nomor=${Surat.nomor}`;
+    card.onclick = () => window.location.href = `surat.html?nomor=${surat.nomor}`;
 
     col.appendChild(card);
     listContainer.appendChild(col);
@@ -43,7 +43,7 @@ function renderSurat(data) {
 // Fitur pencarian
 document.getElementById('searchInput').addEventListener('input', function () {
   const keyword = this.value.toLowerCase();
-  const filtered = allSurat.filter(surat =>
+  const filtered = allsurat.filter(surat =>
     surat.nama_latin.toLowerCase().includes(keyword) ||
     surat.arti.toLowerCase().includes(keyword) ||
     surat.nomor.toString() === keyword
